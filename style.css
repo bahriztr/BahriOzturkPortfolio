@@ -78,6 +78,8 @@ h1 {
   display: block;
   height: 220px;
   object-fit: cover;
+  background: #333;
+  min-height: 220px;
 }
 
 .play-btn {

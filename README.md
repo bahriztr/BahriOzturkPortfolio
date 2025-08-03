@@ -30,6 +30,13 @@ Bu repository Bahri Öztürk'ün kişisel portfolio websitesini içerir.
 
 Website `https://kullaniciadi.github.io/repository-adi` adresinde yayınlanacaktır.
 
+### Önemli Notlar
+
+- `.nojekyll` dosyası GitHub Pages'in Jekyll işlemesini devre dışı bırakır
+- Tüm dosya yolları büyük/küçük harf duyarlıdır
+- Görseller `Backgrounds/` klasöründe bulunmaktadır
+- Video dosyaları ilgili oyun klasörlerinde bulunmaktadır
+
 ## Domain Bağlama
 
 GitHub Pages'te domain bağlamak için:
