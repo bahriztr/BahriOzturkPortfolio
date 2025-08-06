@@ -58,7 +58,7 @@
       <div class="portfolio-item">
         <div class="project-title">Big Small</div>
         <img src="Backgrounds/BigSmall.jpeg" alt="Big Small Game">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="BigSmallGame/BigSmallGame.mp4" 
           data-title="Big Small" 
           data-desc="Big or small? Learn to tell the difference! BigSmall is an educational game that helps kids understand size by comparing big and small animals and objects through fun, interactive gameplay. Use clues and coordinates to find and reveal hidden items — a playful way to develop early thinking and spatial skills!">
@@ -70,7 +70,7 @@
       <div class="portfolio-item">
         <div class="project-title">Days of Week</div>
         <img src="Backgrounds/DaysOfTheWeek.jpeg" alt="Days of the Week">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="DaysOfTheWeek/DaysOfTheWeek.mp4" 
           data-title="Days Of The Week" 
           data-desc="Learn the days of the week through fun and play! DaysOfTheWeek is an educational game that helps kids memorize and understand the order and meaning of each day with interactive activities and cheerful visuals. A playful way to build daily routines and time awareness!">
@@ -82,7 +82,7 @@
       <div class="portfolio-item">
         <div class="project-title">Hospital</div>
         <img src="Backgrounds/HospitalGame.jpeg" alt="Hospital Game">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="HospitalGame/HospitalGame.mp4" 
           data-title="Hospital Game" 
           data-desc="Become a little doctor and help animals feel better! In HospitalGame, kids learn how to prepare an ambulance blueprint, pack a hospital bag with the right items, and care for sick animals. A fun and educational game that teaches empathy, health awareness, and problem-solving!">
@@ -107,7 +107,7 @@
         <div class="project-title">Months of Year</div>
         <img src="Backgrounds/MonthsOfTheYear.jpeg" alt="Months of the Year">
         <button class="play-btn" 
-          data-video="MonthsOfTheYear/MonthsOfTheYear1.mp4" 
+          data-video="MonthsOfTheYear/MonthsOfTheYear.mp4" 
           data-title="Months Of The Year" 
           data-desc="Learn all 12 months in a fun and interactive way! MonthsOfTheYear starts with a matching game to help kids recognize and remember each month. Then, roll the dice and move across a 29-tile board game to reach the finish! A playful blend of learning and adventure that builds time awareness and thinking skills.">
             <span class="play-icon">&#9654;</span> VIDEO
@@ -130,7 +130,7 @@
       <div class="portfolio-item">
         <div class="project-title">Sail Boat</div>
         <img src="Backgrounds/SailBoatGame.jpeg" alt="Sail Boat Game">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="SailBoatGame/movie_001.mp4" 
           data-title="Sail Boat Game" 
           data-desc="Build and customize your own sailboat! In this educational game, kids design their sailboats by dragging and dropping parts to create unique vessels. Then, visit your marina to see your creations come to life. A fun way to learn creativity, planning, and basics of boat building!">
@@ -142,7 +142,7 @@
       <div class="portfolio-item">
         <div class="project-title">Short Tall</div>
         <img src="Backgrounds/ShortTall.jpeg" alt="Short Tall">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="ShortTall/ShortTall1.mp4" 
           data-title="Short Tall" 
           data-desc="Learn the concepts of short and tall in a fun way! ShortTall starts by teaching kids how to distinguish between tall and short objects, then challenges them to complete an exciting platform adventure. An educational game that builds early math and spatial skills through play!">
@@ -166,7 +166,7 @@
       <div class="portfolio-item">
         <div class="project-title">Two Digits</div>
         <img src="Backgrounds/TwoDigitGame.jpeg" alt="Two Digits Game">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="TwoDigitsGame/TwoDigitsGame.mp4" 
           data-title="Two Digits Game" 
           data-desc="Blast off on a cosmic adventure to learn numbers from 11 to 20! Draw stars to get started, then launch rockets from planet to planet as you explore the galaxy of numbers. A playful and imaginative way to build counting skills and keep kids engaged with learning.">
@@ -190,7 +190,7 @@
       <div class="portfolio-item">
         <div class="project-title">Wonderwood Fabl</div>
         <img src="Backgrounds/WonderwoodFabl.jpeg" alt="Wonderwood Fabl">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="WonderwoodFabl/WonderwoodFabl.mp4" 
           data-title="Wonderwood Fabl" 
           data-desc="Step into a magical story where every word matters! Listen carefully as the narrator tells a tale, then find the key words on the screen to unlock the adventure. WonderWoodFabl combines storytelling and word search in a fun, interactive way that boosts listening skills and vocabulary.">
@@ -202,7 +202,7 @@
       <div class="portfolio-item">
         <div class="project-title">Zeppelin Rescue</div>
         <img src="Backgrounds/ZeppelinRescue.jpeg" alt="Zeppelin Rescue">
-        <button class="play-btn" 
+        <button class="play-btn disabled" 
           data-video="ZeppelinRescue/ZeppelinRescue.mp4" 
           data-title="Zeppelin Rescue" 
           data-desc="Build your zeppelin from the blueprint, inflate it, and embark on a heartwarming rescue mission! Help reunite lost animals with their families by safely carrying them onboard. ZeppelinRescue combines creativity, problem-solving, and compassion in a delightful and educational adventure.">
@@ -217,7 +217,7 @@
     <div class="modal-content">
       <span class="close-btn">&times;</span>
       <div class="modal-header" id="modal-title"></div>
-      <video autoplay="true" loop="true" id="portfolio-video" width="720" controls>
+      <video autoplay="true" loop="true" id="portfolio-video" width="720" controls preload="metadata">
         <source src="" type="video/mp4">
         Tarayıcınız video etiketini desteklemiyor.
       </video>
@@ -245,11 +245,36 @@
     // Her play butonunu seç
     document.querySelectorAll('.play-btn').forEach(btn => {
       btn.addEventListener('click', function() {
+        // Disabled butonları kontrol et
+        if (this.classList.contains('disabled')) {
+          alert('This video is not available yet. Coming soon!');
+          return;
+        }
+        
         const videoSrc = this.getAttribute('data-video');
         const videoTitle = this.getAttribute('data-title') || '';
         const videoDesc = this.getAttribute('data-desc') || '';
         const modal = document.getElementById('video-modal');
         const video = document.getElementById('portfolio-video');
+        
+        // Video yükleme hatalarını yakala
+        video.addEventListener('error', function(e) {
+          console.error('Video yükleme hatası:', e);
+          console.error('Video yüklenemedi:', videoSrc);
+          alert('Video yüklenirken bir hata oluştu. Lütfen sayfayı yenileyip tekrar deneyin.');
+          modal.classList.remove('show');
+        });
+        
+        // Video başarıyla yüklendiğinde
+        video.addEventListener('loadeddata', function() {
+          console.log('Video başarıyla yüklendi:', videoSrc);
+        });
+        
+        // Video yüklenmeye başladığında
+        video.addEventListener('loadstart', function() {
+          console.log('Video yüklenmeye başladı:', videoSrc);
+        });
+        
         document.getElementById('modal-title').textContent = videoTitle;
         document.getElementById('modal-desc').textContent = videoDesc;
         video.querySelector('source').src = videoSrc;
