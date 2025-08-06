@@ -223,6 +223,9 @@
           Tarayıcınız video etiketini desteklemiyor.
         </video>
         <iframe id="drive-video" width="720" height="405" frameborder="0" style="display: none;"></iframe>
+        <div id="vimeo-video" style="display: none; padding:75% 0 0 0; position:relative;">
+          <iframe src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Video"></iframe>
+        </div>
       </div>
       <div class="modal-desc" id="modal-desc"></div>
     </div>
@@ -283,13 +286,16 @@
         
         // Vimeo linki kontrol et
         if (videoSrc.includes('vimeo.com')) {
-          // Vimeo için iframe kullan
-          const iframe = document.getElementById('drive-video');
+          // Vimeo için özel iframe kullan
+          const vimeoContainer = document.getElementById('vimeo-video');
+          const vimeoIframe = vimeoContainer.querySelector('iframe');
           const video = document.getElementById('portfolio-video');
+          const driveIframe = document.getElementById('drive-video');
           
-          iframe.src = videoSrc + '?autoplay=1&loop=1';
-          iframe.style.display = 'block';
+          vimeoIframe.src = videoSrc + '?badge=0&autopause=0&player_id=0&app_id=58479';
+          vimeoContainer.style.display = 'block';
           video.style.display = 'none';
+          driveIframe.style.display = 'none';
         } else if (videoSrc.includes('drive.google.com')) {
           // Google Drive için iframe kullan
           const iframe = document.getElementById('drive-video');
@@ -317,23 +323,31 @@
     document.querySelector('.close-btn').onclick = function() {
       const modal = document.getElementById('video-modal');
       const video = document.getElementById('portfolio-video');
-      const iframe = document.getElementById('drive-video');
+      const driveIframe = document.getElementById('drive-video');
+      const vimeoContainer = document.getElementById('vimeo-video');
+      const vimeoIframe = vimeoContainer.querySelector('iframe');
+      
       modal.classList.remove('show');
       video.pause();
       video.currentTime = 0;
-      iframe.src = '';
+      driveIframe.src = '';
+      vimeoIframe.src = '';
     };
 
     // Modal dışında tıklayınca kapansın
     window.onclick = function(event) {
       const modal = document.getElementById('video-modal');
       const video = document.getElementById('portfolio-video');
-      const iframe = document.getElementById('drive-video');
+      const driveIframe = document.getElementById('drive-video');
+      const vimeoContainer = document.getElementById('vimeo-video');
+      const vimeoIframe = vimeoContainer.querySelector('iframe');
+      
       if (event.target == modal) {
         modal.classList.remove('show');
         video.pause();
         video.currentTime = 0;
-        iframe.src = '';
+        driveIframe.src = '';
+        vimeoIframe.src = '';
       }
     }
   </script>
