@@ -23,7 +23,7 @@
         <div class="project-title">3Match</div>
         <img src="Backgrounds/3Match.jpeg" alt="3Match Game">
         <button class="play-btn" 
-          data-video="https://drive.google.com/uc?export=download&id=19nokBAJzOrYb7sB-0toNRxYyINoHUeEQ" 
+          data-video="https://drive.google.com/file/d/19nokBAJzOrYb7sB-0toNRxYyINoHUeEQ/preview" 
           data-title="3 Match" 
           data-desc="Combine recyclable items to create new objects and light the way to the solar lamp! This educational match-3 puzzle game teaches the importance of recycling through fun and creative item merging. Think smart, match right, and help build a brighter, greener future!">
             <span class="play-icon">&#9654;</span> VIDEO
@@ -217,10 +217,13 @@
     <div class="modal-content">
       <span class="close-btn">&times;</span>
       <div class="modal-header" id="modal-title"></div>
-      <video autoplay="true" loop="true" id="portfolio-video" width="720" controls preload="metadata">
-        <source src="" type="video/mp4">
-        Tarayıcınız video etiketini desteklemiyor.
-      </video>
+      <div id="video-container">
+        <video autoplay="true" loop="true" id="portfolio-video" width="720" controls preload="metadata">
+          <source src="" type="video/mp4">
+          Tarayıcınız video etiketini desteklemiyor.
+        </video>
+        <iframe id="drive-video" width="720" height="405" frameborder="0" style="display: none;"></iframe>
+      </div>
       <div class="modal-desc" id="modal-desc"></div>
     </div>
   </div>
@@ -277,8 +280,27 @@
         
         document.getElementById('modal-title').textContent = videoTitle;
         document.getElementById('modal-desc').textContent = videoDesc;
-        video.querySelector('source').src = videoSrc;
-        video.load();
+        
+        // Google Drive linki kontrol et
+        if (videoSrc.includes('drive.google.com')) {
+          // Google Drive için iframe kullan
+          const iframe = document.getElementById('drive-video');
+          const video = document.getElementById('portfolio-video');
+          
+          iframe.src = videoSrc;
+          iframe.style.display = 'block';
+          video.style.display = 'none';
+        } else {
+          // Normal video için video tag kullan
+          const iframe = document.getElementById('drive-video');
+          const video = document.getElementById('portfolio-video');
+          
+          video.querySelector('source').src = videoSrc;
+          video.load();
+          iframe.style.display = 'none';
+          video.style.display = 'block';
+        }
+        
         modal.classList.add('show');
       });
     });
@@ -287,19 +309,23 @@
     document.querySelector('.close-btn').onclick = function() {
       const modal = document.getElementById('video-modal');
       const video = document.getElementById('portfolio-video');
+      const iframe = document.getElementById('drive-video');
       modal.classList.remove('show');
       video.pause();
       video.currentTime = 0;
+      iframe.src = '';
     };
 
     // Modal dışında tıklayınca kapansın
     window.onclick = function(event) {
       const modal = document.getElementById('video-modal');
       const video = document.getElementById('portfolio-video');
+      const iframe = document.getElementById('drive-video');
       if (event.target == modal) {
         modal.classList.remove('show');
         video.pause();
         video.currentTime = 0;
+        iframe.src = '';
       }
     }
   </script>
